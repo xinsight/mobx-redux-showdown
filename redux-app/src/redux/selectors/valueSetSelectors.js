@@ -1,21 +1,21 @@
 
 
-const valueSetsRoot = (state, _) => state.valueSets
+const valueSets = (state, _) => state.valueSets
 const valueSetId = (_, props) => props.valueSet
 const code = (_, props) => props.code
 
 const valueSetRoot = (state, props) => { // convention: "Root" is the parent object
-    let valueSetsRoot_ = valueSetsRoot(state, props) // convention: underscore indicates variable holding result of function with same name
+    let valueSets_ = valueSets(state, props) // convention: underscore indicates variable holding result of function with same name
     let valueSetId_ = valueSetId(state, props)
-    if (valueSetsRoot_) {
-        return valueSetsRoot_[valueSetId_]
+    if (valueSets_) {
+        return valueSets_.get(valueSetId_)
     }
 }
 
 export const valueSet = (state, props) => {
     let valueSetRoot_ = valueSetRoot(state, props)
     if (valueSetRoot_) {
-        return valueSetRoot_.valueSet
+        return valueSetRoot_.get('valueSet')
     }
 }
 

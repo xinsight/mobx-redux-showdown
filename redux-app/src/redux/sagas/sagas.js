@@ -6,34 +6,33 @@ import {
     LOAD_VALUESET
 } from '../../redux/actions/actions'
 
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { put, takeLatest } from 'redux-saga/effects'
 
 
 
 function* fetchValueSet(action) {
+
+    // ???: takeLatest means that when this function is called 3x concurrently,
+    // ???: it will start a function, then cancel that function and start a new one, then cancel
+    // ???: that function and start a new one.
     console.log('XXX')
     yield put(setValueSetIsLoading(action.valueSetId, true))
 
     const url = 'http://hapi.fhir.org/baseDstu3/ValueSet/' + action.valueSetId
 
-    const response = yield fetch(url)
+    try {
+        const response = yield fetch(url)
 
-    const json = yield response.json()
+        const json = yield response.json()
 
-        // .then(response => {
-        //     return response.json()
-        // })
-        // .then(json => {
         let items = json.compose.include[0].concept // FHIR fun
         let valueSet = {} // {code: display}
         items.forEach(item => valueSet[item.code] = item.display)
 
-        // this.valueSets[valueSetId] = values
-
-    yield put(setValueSet(action.valueSetId, valueSet))
-
-        // })
-
+        yield put(setValueSet(action.valueSetId, valueSet))
+    } catch(error) {
+        yield put(setValueSetError(action.valueSetId, error))
+    }
 
     console.log('YYY')
     yield put(setValueSetIsLoading(action.valueSetId, false))
