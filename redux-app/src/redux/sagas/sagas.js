@@ -6,7 +6,7 @@ import {
     LOAD_VALUESET
 } from '../../redux/actions/actions'
 
-import { put, take, fork } from 'redux-saga/effects'
+import { put, take, fork, call } from 'redux-saga/effects'
 
 
 function* fetchValueSet(action) {
@@ -16,7 +16,7 @@ function* fetchValueSet(action) {
     const url = 'http://hapi.fhir.org/baseDstu3/ValueSet/' + action.valueSetId
 
     try {
-        const response = yield fetch(url)
+        const response = yield call(fetch, url)
 
         const json = yield response.json()
 
@@ -26,7 +26,7 @@ function* fetchValueSet(action) {
 
         yield put(setValueSet(action.valueSetId, valueSet))
     } catch(error) {
-        yield put(setValueSetError(action.valueSetId, error))
+        yield put(setValueSetError(action.valueSetId, error.message))
     }
 
     yield put(setValueSetIsLoading(action.valueSetId, false))

@@ -24,7 +24,7 @@ class ValueSetDisplay extends React.Component {
         }
 
         if (this.props.error) {
-            return <div>Error: {JSON.stringify(this.props.error)}</div>
+            return <div>Error: {this.props.error}</div>
         }
 
         return (

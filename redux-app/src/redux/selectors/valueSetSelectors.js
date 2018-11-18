@@ -30,13 +30,13 @@ export const display = (state, props) => {
 export const isLoading = (state, props) => {
     let valueSetRoot_ = valueSetRoot(state, props)
     if (valueSetRoot_) {
-        return valueSetRoot_.isLoading
+        return valueSetRoot_.get('isLoading')
     }
 }
 
 export const error = (state, props) => {
     let valueSetRoot_ = valueSetRoot(state, props)
     if (valueSetRoot_) {
-        return valueSetRoot_.error
+        return valueSetRoot_.get('error')
     }
 }
