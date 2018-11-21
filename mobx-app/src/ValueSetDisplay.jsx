@@ -22,7 +22,7 @@ const ValueSetDisplay = inject('ValueSetStore')(observer(class ValueSetDisplay e
 
         const ValueSetStore = this.props.ValueSetStore
 
-        if (ValueSetStore.isLoading) {
+        if (ValueSetStore.isLoading(this.props.valueSet)) {
             return <div>Loading...</div>
         }
 
