@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
-//import './ValueSetDisplay.css'
-
 /** show the display of a value set code */
 //@inject('ValueSetStore')
 //@observer
