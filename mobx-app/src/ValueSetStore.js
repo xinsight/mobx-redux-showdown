@@ -7,10 +7,10 @@ class ValueSetStore {
     valueSets = {} // {valueSetId: {code: display} }
 
     // @observable
-    _isLoading = new Map() // {valueSetId: boolean}
+    loading = new Map() // {valueSetId: boolean}
 
     isLoading = (valueSetId) => {
-        return this._isLoading.get(valueSetId)
+        return this.loading.get(valueSetId)
     }
 
     // @observable
@@ -33,7 +33,7 @@ class ValueSetStore {
 
         const url = 'http://hapi.fhir.org/baseDstu3/ValueSet/' + valueSetId
 
-        this._isLoading.set(valueSetId, true)
+        this.loading.set(valueSetId, true)
         this.error = undefined
 
         fetch(url).then(response => {
@@ -51,7 +51,7 @@ class ValueSetStore {
             this.error = error
         })
         .finally(() => {
-            this._isLoading.set(valueSetId, false)
+            this.loading.set(valueSetId, false)
         })
     }
 
@@ -73,7 +73,7 @@ class ValueSetStore {
 
 decorate(ValueSetStore, {
     valueSets: observable,
-    _isLoading: observable,
+    loading: observable,
     error: observable,
 })
 
