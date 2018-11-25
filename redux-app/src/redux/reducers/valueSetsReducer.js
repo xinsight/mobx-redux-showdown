@@ -1,24 +1,24 @@
-import Immutable from 'immutable'
+import {createReducer} from "redux-starter-kit";
+
 import {
     SET_VALUESET,
     SET_VALUESET_IS_LOADING,
     SET_VALUESET_ERROR,
  } from '../actions/actions'
 
-let initialState = Immutable.Map({})
+const valueSetReducer = createReducer({}, {
+    [SET_VALUESET_IS_LOADING] : (state, action) => {
+        const {isLoading, valueSetId} = action;
+        state[valueSetId] = state[valueSetId] || {};
+        state[valueSetId].isLoading = isLoading;
+    },
+    [SET_VALUESET_ERROR] : (state, action) => {
+        const {error, valueSetId} = action;
+        state[valueSetId] = state[valueSetId] || {};
+        state[valueSetId].error = error;
+    },
+    [SET_VALUESET] : (state, action) => { state[action.valueSetId].valueSet = action.valueSet },
+})
 
-const valueSets = (state = initialState, action) => {
-    switch (action.type) {
-        case SET_VALUESET_IS_LOADING:
-            return state.setIn([action.valueSetId, 'isLoading'], action.isLoading)
-        case SET_VALUESET_ERROR:
-            return state.setIn([action.valueSetId, 'error'], action.error)
-        case SET_VALUESET:
-            return state.setIn([action.valueSetId, 'valueSet'], action.valueSet)
-        default:
-            return state
-    }
 
-}
-
-export default valueSets
+export default valueSetReducer

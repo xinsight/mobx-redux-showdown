@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { fetchValueSet } from './redux/actions/actions'
-import * as valueSetSelectors from './redux/selectors/valueSetSelectors'
+
+import {selectValueSetById} from "./redux/selectors/valueSetSelectors";
 
 /** show the display of a value set code */
 class ValueSetDisplay extends React.Component {
@@ -35,12 +36,13 @@ class ValueSetDisplay extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    isLoading: valueSetSelectors.isLoading(state, props),
-    error: valueSetSelectors.error(state, props),
-    valueSetDisplay: valueSetSelectors.display(state, props),
-})
+const mapState = (state, props) => {
+    const valueSetEntry = selectValueSetById(state, props) || {};
+    const {isLoading, error, valueSet = {}} = valueSetEntry;
+    const valueSetDisplay = valueSet[props.code];
+    return {isLoading, error, valueSetDisplay}
+}
 
-const mapDispatchToProps = {load : fetchValueSet};
+const actionCreators = {load : fetchValueSet};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ValueSetDisplay)
+export default connect(mapState, actionCreators)(ValueSetDisplay)
