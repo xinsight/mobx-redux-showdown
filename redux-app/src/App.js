@@ -3,13 +3,8 @@ import ValueSetDisplay from './ValueSetDisplay'
 import './App.css'
 
 import { Provider }  from 'react-redux'
-import {configureStore} from "redux-starter-kit";
-import rootReducer from './redux/reducers/reducers'
 
-
-const store = configureStore({
-    reducer : rootReducer,
-});
+import {store} from "./store";
 
 class App extends Component {
   render() {
