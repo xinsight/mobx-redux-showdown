@@ -4,22 +4,17 @@ import './App.css'
 
 import { Provider }  from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from './redux/reducers/reducers'
-import rootSaga from './redux/sagas/sagas'
 import thunk from "redux-thunk";
 
-const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   rootReducer, // 0: reducer
   composeWithDevTools(
-    applyMiddleware(thunk, sagaMiddleware), // 1: middleware
+    applyMiddleware(thunk), // 1: middleware
   )
 )
-
-sagaMiddleware.run(rootSaga)
 
 class App extends Component {
   render() {
