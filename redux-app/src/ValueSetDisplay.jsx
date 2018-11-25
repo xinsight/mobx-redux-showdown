@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { loadValueSetAction } from './redux/actions/actions'
+import { fetchValueSet } from './redux/actions/actions'
 import * as valueSetSelectors from './redux/selectors/valueSetSelectors'
 
 /** show the display of a value set code */
@@ -41,8 +41,6 @@ const mapStateToProps = (state, props) => ({
     valueSetDisplay: valueSetSelectors.display(state, props),
 })
 
-const mapDispatchToProps = dispatch => ({
-    load: (valueSet) => dispatch(loadValueSetAction(valueSet))
-})
+const mapDispatchToProps = {load : fetchValueSet};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ValueSetDisplay)
