@@ -17,12 +17,15 @@ tldr; It's ok not to like Redux. Here's why.
 
 Let's start with something simple and concrete. The number of files:
 
-Redux 10
-MobX 6
+*Redux*
+10
+
+*MobX*
+6
 
 Why does Redux have four more files than MobX? That's because of redux's requirement to split things into actions, reducers, selectors, and sagas (for handling the network request).
 
-Redux
+*Redux*
 ```
 redux-app/src/redux/actions/actions.js
 redux-app/src/redux/reducers/reducers.js
@@ -31,7 +34,7 @@ redux-app/src/redux/sagas/sagas.js
 redux-app/src/redux/selectors/valueSetSelectors.js
 ```
 
-MobX
+*MobX*
 ```
 mobx-app/src/ValueSetStore.js
 ```
@@ -46,12 +49,12 @@ Ok, so Redux requires managing more files, but what about the code in those file
 
 Let's compare how you would add a bit of data you add to your app:
 
-Redux
+*Redux*
 - a way to set the data (reducer)
 - a way to get the data (selector)
 - actions for getting and setting the data
 
-Mobx
+*MobX*
 - add a variable to a store
 - make it observable
 
@@ -65,12 +68,12 @@ I've tried using action creators to generate my actions, but that didn't improve
 
 So you have a store, and now you want to access the data from a component:
 
-Redux
+*Redux*
 - connect your component
 - add/edit mapStateToProps to get (select) data
 - add/edit mapDispatchToProps to set (write) data
 
-MobX
+*MobX*
 - inject your store
 - call functions to get, set, etc.
 
@@ -80,7 +83,7 @@ With MobX, once you inject your store, you have access to every function and pro
 
 Let's take a step back and look at how you setup a store. This is something you don't have to do that often, but it's still critical.
 
-Redux
+*Redux*
 ```
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -109,7 +112,7 @@ class App extends Component {
 }
 ```
 
-MobX
+*MobX*
 ```
 import { Provider } from 'mobx-react'
 import ValueSetStore from './ValueSetStore'
@@ -127,9 +130,11 @@ class App extends Component {
 }
 ```
 
-Redux clearly requires much more hand-holding - mainly because it doesn't handle asynchronous actions out-of-the-box, you so need to configure it to use a separate library (redux-thunk or redux-saga).
+Redux clearly requires much more hand-holding - mainly because it doesn't handle asynchronous actions out-of-the-box, you so need to configure it to use a separate library (redux-thunk or redux-saga). MobX is simple enough to be done from memory.
 
 ## Debugging
+
+[redux-devtools.png]
 
 In the Redux setup I added the Redux dev tools, because that seems to be a popular tool for visualizing how react works. It's pretty and makes a good first impression, but I prefer the raw JSON to the tree visual. And in practice, I found the devtools to be useful for solving easy problems (a missing property of an action), but unhelpful for solving trickier issues (actions being called unexpectedly or an action not being called at all). I find that adding a breakpoint and typing `JSON.stringify(store)` is often just as useful. It's also a bummer that breakpoints cannot be used with devtools, since once you pause on a breakpoint, the redux devtools are paused as well.
 
@@ -139,11 +144,11 @@ MobX has some in-browser debugging tools, but I've never found the need. You can
 
 What about helpers and other libraries?
 
-Redux
+*Redux*
 - immutable
 - saga-react (or react-thunk)
 
-MobX
+*MobX*
 - [none]
 
 Immutable is not strictly needed, but was recommended for when your global store starts to get complicated. And in this example, just using `getIn` and `setIn` was simpler than having to dealing with plain javascript objects and the spread syntax.
@@ -154,8 +159,11 @@ As mentioned, Redux doesn't handle asynchronous operations out of the box, so yo
 
 Don't make a decision based on github stars alone.
 
-Redux
+*Redux*
 45k
 
-MobX
+*MobX*
 17k
+
+Browse the code for the (Redux)[https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src] and <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src">MobX</a> apps. Let me know if you have any issues or suggestions for improvement.
+
