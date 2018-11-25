@@ -1,7 +1,7 @@
 
-Redux and Mobx showdown
+# Redux and Mobx showdown
 
-I've been using Redux for a project, and honestly, I don't like it. I decided to write a simple app in Redux and then write it again in MobX to compare the two approaches to state management.
+I've been using Redux for a project, and honestly, **I don't like it**. I decided to write a simple app in Redux and then write it again in MobX to compare the two approaches to state management.
 
 The app loads a network resource, and displays it. Pretty simple stuff. To make this a bit more realistic, I also wanted to handle:
 
@@ -134,7 +134,7 @@ Redux clearly requires much more hand-holding - mainly because it doesn't handle
 
 ## Debugging
 
-[redux-devtools.png]
+<img src="redux-devtools.png">
 
 In the Redux setup I added the Redux dev tools, because that seems to be a popular tool for visualizing how react works. It's pretty and makes a good first impression, but I prefer the raw JSON to the tree visual. And in practice, I found the devtools to be useful for solving easy problems (a missing property of an action), but unhelpful for solving trickier issues (actions being called unexpectedly or an action not being called at all). I find that adding a breakpoint and typing `JSON.stringify(store)` is often just as useful. It's also a bummer that breakpoints cannot be used with devtools, since once you pause on a breakpoint, the redux devtools are paused as well.
 
@@ -159,11 +159,11 @@ As mentioned, Redux doesn't handle asynchronous operations out of the box, so yo
 
 Don't make a decision based on github stars alone.
 
-*Redux*
+**Redux**
 45k
 
-*MobX*
+**MobX**
 17k
 
-Browse the code for the (Redux)[https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src] and <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src">MobX</a> apps. Let me know if you have any issues or suggestions for improvement.
+Browse the code for the [Redux](https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src) and <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src">MobX</a> apps. Let me know if you have any issues or suggestions for improvement.
 
