@@ -3,18 +3,13 @@ import ValueSetDisplay from './ValueSetDisplay'
 import './App.css'
 
 import { Provider }  from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import {configureStore} from "redux-starter-kit";
 import rootReducer from './redux/reducers/reducers'
-import thunk from "redux-thunk";
 
 
-const store = createStore(
-  rootReducer, // 0: reducer
-  composeWithDevTools(
-    applyMiddleware(thunk), // 1: middleware
-  )
-)
+const store = configureStore({
+    reducer : rootReducer,
+});
 
 class App extends Component {
   render() {
