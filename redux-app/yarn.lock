@@ -6950,10 +6950,6 @@ redux-devtools-extension@^2.13.3, redux-devtools-extension@^2.13.5:
   version "2.13.6"
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.6.tgz#1e59bb9c4e6c05862ac7417c607d0201ca0854c1"
 
-redux-saga@^0.16.2:
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"
-
 redux-starter-kit@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/redux-starter-kit/-/redux-starter-kit-0.2.0.tgz#57313d3a5556e9f3c432a1efa80ca74d9976f5d8"
