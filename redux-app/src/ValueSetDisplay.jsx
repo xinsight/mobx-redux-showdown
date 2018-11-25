@@ -1,10 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import {createSelector} from"redux-starter-kit";
 
-import { fetchValueSet } from './redux/actions/actions'
+import { fetchValueSet } from "./features/valueSets";
 
-import {selectValueSetById} from "./redux/selectors/valueSetSelectors";
+const selectValueSetById = createSelector(
+    ["valueSets", (state, props) => props.valueSet],
+    (valueSets, valueSetId) => valueSets[valueSetId]
+);
 
 /** show the display of a value set code */
 class ValueSetDisplay extends React.Component {
@@ -15,7 +19,7 @@ class ValueSetDisplay extends React.Component {
     }
 
     componentDidMount() {
-        this.props.load(this.props.valueSet)
+        this.props.fetchValueSet(this.props.valueSet)
     }
 
     render () {
@@ -43,6 +47,5 @@ const mapState = (state, props) => {
     return {isLoading, error, valueSetDisplay}
 }
 
-const actionCreators = {load : fetchValueSet};
 
-export default connect(mapState, actionCreators)(ValueSetDisplay)
+export default connect(mapState, {fetchValueSet})(ValueSetDisplay)
