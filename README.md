@@ -7,11 +7,22 @@ The app loads a network resource, and displays it. Pretty simple stuff. To make 
 
 - loading states
 - errors
-- duplicate network requests
+- duplicate network requests (only one request should happen)
 
-This repo contains both projets.
+## Update
+2018-11-26: I received a total rewrite of the redux app by <a href="https://github.com/markerikson">markerikson</a> using `redux-starter-kit`, and I've added it to the shootout. I'll need to update my comments below since it addresses *many* of the pain points with Redux.
 
-tldr; It's ok not to like Redux. Here's why.
+There are now three apps in the repo:
+
+- mobx-app: MobX
+- redux-app: Immutable.js, sagas, hand-written action creators
+- redux-starter-kit-app: thunks, automatic action creators, simplified connect, redux logic is in a single file, and more
+
+tldr; There are many ways to use Redux - choose wisely!
+
+===
+
+  note: The commentary below only describes `mobx-app` and `redux-app`.
 
 ## Number of files
 
