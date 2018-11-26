@@ -1,4 +1,9 @@
-import {createSlice} from "redux-starter-kit";
+import {createSlice, createSelector} from "redux-starter-kit";
+
+export const selectValueSetById = createSelector(
+    ["valueSets", (state, props) => props.valueSet],
+    (valueSets, valueSetId) => valueSets[valueSetId]
+);
 
 const valueSet = createSlice({
     slice : "valueSets",
@@ -30,6 +35,13 @@ const {setValueSetLoading, setValueSetError, loadValueSet} = valueSetActions;
 
 export function fetchValueSet(valueSetId) {
     return async (dispatch, getState) => {
+        const valueSetEntry = selectValueSetById(getState(), {valueSet : valueSetId}) || {};
+
+        // Bail out if we're loading or already loaded
+        if(valueSetEntry.isLoading || valueSetEntry.valueSet) {
+            return;
+        }
+
         dispatch(setValueSetLoading({valueSetId, isLoading: true}));
 
         const url = 'http://hapi.fhir.org/baseDstu3/ValueSet/' + valueSetId

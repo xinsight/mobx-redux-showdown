@@ -1,14 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {createSelector} from"redux-starter-kit";
 
-import { fetchValueSet } from "./features/valueSets";
-
-const selectValueSetById = createSelector(
-    ["valueSets", (state, props) => props.valueSet],
-    (valueSets, valueSetId) => valueSets[valueSetId]
-);
+import { fetchValueSet, selectValueSetById } from "./features/valueSets";
 
 /** show the display of a value set code */
 class ValueSetDisplay extends React.Component {
