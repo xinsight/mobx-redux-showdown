@@ -14,9 +14,9 @@ The app loads a network resource, and displays it. Pretty simple stuff. To make 
 
 There are now three apps in the repo:
 
-- mobx-app: MobX
-- redux-app: Immutable.js, sagas, hand-written action creators
-- redux-starter-kit-app: thunks, automatic action creators, simplified connect, redux logic is in a single file, and more
+- <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app">mobx-app</a>: MobX
+- <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-app">redux-app</a>: Immutable.js, sagas, hand-written action creators
+- <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-starter-kit-app">redux-starter-kit-app</a>: thunks, automatic action creators, simplified connect, redux logic is in a single file, and more
 
 tldr; There are many ways to use Redux - choose wisely!
 
