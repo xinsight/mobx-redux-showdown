@@ -58,7 +58,7 @@ export function fetchValueSet(valueSetId) {
             dispatch(loadValueSet({valueSetId, valueSet}))
         } catch(error) {
             console.error(error)
-            dispatch(setValueSetError(valueSetId, error.message))
+            dispatch(setValueSetError({valueSetId, error : error.message}))
         }
 
         dispatch(setValueSetLoading({valueSetId, isLoading: false}))
