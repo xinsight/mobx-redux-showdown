@@ -37,6 +37,9 @@ class ValueSetStore {
         this.error = undefined
 
         fetch(url).then(response => {
+            if (!response.ok) {
+              return Promise.reject(response.status)
+            }
             return response.json()
         })
         .then(json => {
