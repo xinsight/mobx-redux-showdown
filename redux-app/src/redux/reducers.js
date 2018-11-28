@@ -1,6 +1,7 @@
 
 import { combineReducers } from 'redux'
-import valueSetsReducer from './valueSetsReducer'
+
+import valueSetsReducer from './features/valueSets'
 
 // state
 //  valueSets: { // Immutable.Map

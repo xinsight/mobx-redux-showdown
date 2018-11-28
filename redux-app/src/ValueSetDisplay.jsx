@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { loadValueSetAction } from './redux/actions/actions'
+import { loadValueSetAction } from './redux/features/valueSets'
 import * as valueSetSelectors from './redux/selectors/valueSetSelectors'
 
 /** show the display of a value set code */
