@@ -16,7 +16,7 @@ There are now three apps in the repo:
 
 - <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app">mobx-app</a>: MobX
 - <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-app">redux-app</a>: Immutable.js, sagas, hand-written action creators
-- <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-starter-kit-app">redux-starter-kit-app</a>: thunks, automatic action creators, simplified connect, redux logic is in a single file, and more
+- <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-starter-kit-app">redux-starter-kit-app</a>: thunks, automatic action creators, simplified createStore, redux logic is in a single file, and more
 
 tldr; There are many ways to use Redux - choose wisely!
 
@@ -94,8 +94,6 @@ So you have a store, and now you want to access the data from a component:
 - call functions to get, set, etc.
 
 With MobX, once you inject your store, you have access to every function and property of the store. You can call functions directly, and don't need to dispatch an action to trigger a network request, or call selectors to get the eventual result of the network request. And you don't need to create the `mapStateToProps` and `mapDispatchToProps` objects.
-
-[TODO: explain how `redux-starter-kit-app` does it.]
 
 ## Creating a store
 
