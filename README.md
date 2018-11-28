@@ -157,7 +157,10 @@ What about helpers and other libraries?
 
 *Redux*
 - immutable
-- saga-react (or react-thunk)
+- redux-saga
+
+*Redux Starter Kit*
+- react-thunk
 
 *MobX*
 - [none]

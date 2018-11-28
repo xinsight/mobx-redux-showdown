@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { fetchValueSet, selectValueSetById } from "./features/valueSets";
+import { fetchValueSet, selectValueSetById } from './features/valueSets'
 
 /** show the display of a value set code */
 class ValueSetDisplay extends React.Component {
@@ -35,9 +35,9 @@ class ValueSetDisplay extends React.Component {
 }
 
 const mapState = (state, props) => {
-    const valueSetEntry = selectValueSetById(state, props) || {};
-    const {isLoading, error, valueSet = {}} = valueSetEntry;
-    const valueSetDisplay = valueSet[props.code];
+    const valueSetEntry = selectValueSetById(state, props) || {}
+    const {isLoading, error, valueSet = {}} = valueSetEntry
+    const valueSetDisplay = valueSet[props.code]
     return {isLoading, error, valueSetDisplay}
 }
 
