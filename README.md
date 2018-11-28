@@ -20,29 +20,34 @@ There are now three apps in the repo:
 
 tldr; There are many ways to use Redux - choose wisely!
 
-===
-
-  note: The commentary below only describes `mobx-app` and `redux-app`.
 
 ## Number of files
 
 Let's start with something simple and concrete. The number of files:
 
 *Redux*
-10
+9
+
+*Redux Starter Kit*
+7
 
 *MobX*
 6
 
-Why does Redux have four more files than MobX? That's because of redux's requirement to split things into actions, reducers, selectors, and sagas (for handling the network request).
+Why does Redux have more files than MobX? That's because of the Redux way of looking at the world and splitting things into actions, reducers, selectors, and sagas (for handling the network request).
 
 *Redux*
 ```
-redux-app/src/redux/actions/actions.js
-redux-app/src/redux/reducers/reducers.js
-redux-app/src/redux/reducers/valueSetsReducer.js
+redux-app/src/redux/features/valueSets.js
+redux-app/src/redux/reducers.js
 redux-app/src/redux/sagas/sagas.js
 redux-app/src/redux/selectors/valueSetSelectors.js
+```
+
+*Redux Starter Kit*
+```
+redux-starter-kit-app/src/features/valueSets.js
+redux-starter-kit-app/src/store.js
 ```
 
 *MobX*
@@ -50,13 +55,13 @@ redux-app/src/redux/selectors/valueSetSelectors.js
 mobx-app/src/ValueSetStore.js
 ```
 
-One could argue that it's a clean separation of concerns to split functionality apart into separate files. But it also means that you have to visit all four files in order to do add any practical feature. In MobX, you have a single place, where you can put all related functions (actions), getters (selectors), setters (reducers) and promises (sagas). Is it messy to have all those in one place? Hardly, it seems completely clear and sane.
+With Redux, I initially had actions in a separate file, but that was a terrible idea in practice as it was just a lot of monkey-work to deal with imports. Following the [ducks](https://github.com/erikras/ducks-modular-redux) setup, I refactored so that actions, reducer, action creators and sagas are in one file. A definite improvement, but still, the selectors are in a separate file and things are a bit more spread out compared to MobX's single class.
 
-It's also ironic that Redux wants you to split up your code in to separate files. When React was introduced, it went against traditional wisdom that you should keep your HTML out of your code to keep your code clean. Instead of moving all HTML to templates, React fully embraced the idea of mixing HTML in your code, and I suspect that part of React's success is that everything is in one place. There's no need to jump back and forth from code to HTML, no need to manually keep these files synchronized.
+`redux-starter-kit-app` uses some helpers to also reduce the valueSet store down to a single file. (I haven't fully digested the magic.) The additional file is just a global store that pulls in all the feature stores.
 
 ## Verbosity
 
-Ok, so Redux requires managing more files, but what about the code in those files?
+Ok, so Redux means you're managing more files, but what about the code in those files?
 
 Let's compare how you would add a bit of data you add to your app:
 
@@ -71,9 +76,9 @@ Let's compare how you would add a bit of data you add to your app:
 
 With Mobx and decorators, this can be done with one line. With Redux, the selectors and reducers are added in 2 different files (which we've covered) but there is also the additional idea of an "action". What's up with actions?
 
-Since the parts of Redux are so loosely coupled, you cannot call functions or properties directly, but need to write actions. And then you have to write both sides of the action: the sender which dispatches the action, and a receiver to observe and handle the action. And in both your dispatcher and receiver, you need to make sure to import your action.
+Since the parts of Redux are so loosely coupled, you cannot call functions or properties directly, but need to write actions. And then you have to write both sides of the action: the sender which dispatches the action, and a receiver to observe and handle the action.
 
-I've tried using action creators to generate my actions, but that didn't improve things. You still need to write your annoying string constants like `const FETCH_VALUESET = 'FETCH_VALUESET'` but you have to remember to use the action creator like `fetchValueSetAction()` in the dispatch, and the `FETCH_VALUESET` string constant in the action handler. More things to keep track of.
+Actions involve some brain-dead boilerplate like `const FETCH_VALUESET = 'FETCH_VALUESET'` which isn't hard, but is annoying. (And with copy/pasting it's easy to accidentially duplicate the string for two vars which will lead to some head scratching.)
 
 ## Components
 
@@ -89,6 +94,8 @@ So you have a store, and now you want to access the data from a component:
 - call functions to get, set, etc.
 
 With MobX, once you inject your store, you have access to every function and property of the store. You can call functions directly, and don't need to dispatch an action to trigger a network request, or call selectors to get the eventual result of the network request. And you don't need to create the `mapStateToProps` and `mapDispatchToProps` objects.
+
+[TODO: explain how `redux-starter-kit-app` does it.]
 
 ## Creating a store
 
@@ -142,6 +149,8 @@ class App extends Component {
 ```
 
 Redux clearly requires much more hand-holding - mainly because it doesn't handle asynchronous actions out-of-the-box, you so need to configure it to use a separate library (redux-thunk or redux-saga). MobX is simple enough to be done from memory.
+
+`redux-starter-kit-app` can create a store with redux-thunk middleware in one-line.
 
 ## Debugging
 
