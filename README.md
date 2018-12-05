@@ -78,7 +78,7 @@ With Mobx and decorators, this can be done with one line. With Redux, the select
 
 Since the parts of Redux are so loosely coupled, you cannot call functions or properties directly, but need to write actions. And then you have to write both sides of the action: the sender which dispatches the action, and a receiver to observe and handle the action.
 
-Actions involve some brain-dead boilerplate like `const FETCH_VALUESET = 'FETCH_VALUESET'` which isn't hard, but is annoying. (And with copy/pasting it's easy to accidentially duplicate the string for two vars which will lead to some head scratching.)
+Actions involve some brain-dead boilerplate like `const FETCH_VALUESET = 'FETCH_VALUESET'` which isn't hard, but is annoying. (And with copy/pasting it's easy to accidentally duplicate the string for two vars which will lead to some head scratching.)
 
 ## Components
 
