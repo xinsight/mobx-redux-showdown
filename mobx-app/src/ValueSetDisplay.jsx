@@ -12,10 +12,6 @@ const ValueSetDisplay = inject('ValueSetStore')(observer(class ValueSetDisplay e
         code: PropTypes.string.isRequired,
     }
 
-    componentDidMount() {
-        this.props.ValueSetStore.load(this.props.valueSet)
-    }
-
     render () {
 
         const ValueSetStore = this.props.ValueSetStore
