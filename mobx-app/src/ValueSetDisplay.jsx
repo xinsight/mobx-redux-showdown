@@ -14,9 +14,9 @@ const ValueSetDisplay = inject('ValueSetStore')(observer(class ValueSetDisplay e
 
     render () {
 
-        const ValueSetStore = this.props.ValueSetStore
+        const { ValueSetStore, valueSet, code } = this.props
 
-        if (ValueSetStore.isLoading(this.props.valueSet)) {
+        if (ValueSetStore.isLoading(valueSet)) {
             return <div>Loading...</div>
         }
 
@@ -25,8 +25,8 @@ const ValueSetDisplay = inject('ValueSetStore')(observer(class ValueSetDisplay e
         }
 
         return (
-            <div>Display for <b>{this.props.code}</b> is:
-                <b>{ValueSetStore.display({valueSet: this.props.valueSet, code: this.props.code}) || '-'}</b>
+            <div>Display for <b>{code}</b> is:
+                <b>{ValueSetStore.display({valueSet, code}) || '-'}</b>
             </div>
         )
     }

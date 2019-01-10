@@ -13,10 +13,14 @@ class ValueSetStore {
         return this.loading.get(valueSetId)
     }
 
+    /** get a value set {code: display} */
+    valueSet = (valueSetId) => {
+        return this.valueSets.get(valueSetId)
+    }
+
     // @observable
     error = undefined // TODO: {valueSetId: error}
 
-    /** should be called by any component that requires a ValueSet */
     // @action
     load = (valueSetId) => {
 
@@ -37,40 +41,31 @@ class ValueSetStore {
         this.loading.set(valueSetId, true)
         this.error = undefined
 
-        fetch(url).then(response => {
-            if (!response.ok) {
-              return Promise.reject(response.status)
-            }
-            return response.json()
-        })
-        .then(json => {
-            let items = json.compose.include[0].concept // FHIR fun
-            let values = {} // {code: display}
-            items.forEach(item => values[item.code] = item.display)
-            // ???: action/runInAction are not needed. Why?
-            // runInAction(() => {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                return Promise.reject(response.status)
+                }
+                return response.json()
+            })
+            .then(json => {
+                let items = json.compose.include[0].concept // FHIR fun
+                let values = {} // {code: display}
+                items.forEach(item => values[item.code] = item.display)
                 this.valueSets.set(valueSetId, values)
-            // })
-        })
-        .catch((error) => {
-            console.error('🛑: ' + error)
-            this.error = error
-        })
-        .finally(() => {
-            this.loading.set(valueSetId, false)
-        })
-    }
-
-    /** get a value set {code: display} */
-    valueSet = (valueSetId) => {
-        return this.valueSets.get(valueSetId)
-        // return this.valueSets[valueSetId]
+            })
+            .catch((error) => {
+                console.error('🛑: ' + error)
+                this.error = error
+            })
+            .finally(() => {
+                this.loading.set(valueSetId, false)
+            })
     }
 
     /** return a display value for a given value set and code */
     display = ({valueSet, code}) => {
 
-        // TEST: automatically load
         this.load(valueSet)
 
         const valueSetObject = this.valueSet(valueSet)
@@ -86,7 +81,6 @@ decorate(ValueSetStore, {
     valueSets: observable,
     loading: observable,
     error: observable,
-    // load: action,
 })
 
 export default ValueSetStore
