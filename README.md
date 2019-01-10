@@ -186,5 +186,8 @@ Don't make a decision based on github stars alone.
 **MobX**
 17k
 
-Browse the code for the [Redux](https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src) and <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src">MobX</a> apps. Let me know if you have any issues or suggestions for improvement.
+Browse the code for the 
+[Redux](https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-app/src),
+[Redux Starter Kit](https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-starter-kit-app/src) 
+and [MobX](https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src) apps. Let me know if you have any issues or suggestions for improvement.
 
