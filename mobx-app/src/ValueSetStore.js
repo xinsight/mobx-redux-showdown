@@ -4,7 +4,7 @@ import { decorate, observable } from 'mobx'
 class ValueSetStore {
 
     // @observable
-    valueSets = {} // {valueSetId: {code: display} }
+    valueSets = new Map() // {valueSetId: {code: display} }
 
     // @observable
     loading = new Map() // {valueSetId: boolean}
@@ -13,17 +13,22 @@ class ValueSetStore {
         return this.loading.get(valueSetId)
     }
 
+    /** get a value set {code: display} */
+    valueSet = (valueSetId) => {
+        return this.valueSets.get(valueSetId)
+    }
+
     // @observable
     error = undefined // TODO: {valueSetId: error}
 
-    /** should be called by any component that requires a ValueSet */
+    // @action
     load = (valueSetId) => {
 
         // skip load if already loaded...
-        let valueSet = this.valueSets[valueSetId]
+        let valueSet = this.valueSet(valueSetId)
         if (valueSet) {
             console.log('already loaded...')
-            return valueSet
+            return
         }
 
         if (this.isLoading(valueSetId)) {
@@ -36,35 +41,33 @@ class ValueSetStore {
         this.loading.set(valueSetId, true)
         this.error = undefined
 
-        fetch(url).then(response => {
-            if (!response.ok) {
-              return Promise.reject(response.status)
-            }
-            return response.json()
-        })
-        .then(json => {
-            let items = json.compose.include[0].concept // FHIR fun
-            let values = {} // {code: display}
-            items.forEach(item => values[item.code] = item.display)
-            this.valueSets[valueSetId] = values
-            return values
-        })
-        .catch((error) => {
-            console.error('🛑: ' + error)
-            this.error = error
-        })
-        .finally(() => {
-            this.loading.set(valueSetId, false)
-        })
-    }
-
-    /** get a value set {code: display} */
-    valueSet = (valueSetId) => {
-        return this.valueSets[valueSetId]
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                return Promise.reject(response.status)
+                }
+                return response.json()
+            })
+            .then(json => {
+                let items = json.compose.include[0].concept // FHIR fun
+                let values = {} // {code: display}
+                items.forEach(item => values[item.code] = item.display)
+                this.valueSets.set(valueSetId, values)
+            })
+            .catch((error) => {
+                console.error('🛑: ' + error)
+                this.error = error
+            })
+            .finally(() => {
+                this.loading.set(valueSetId, false)
+            })
     }
 
     /** return a display value for a given value set and code */
     display = ({valueSet, code}) => {
+
+        this.load(valueSet)
+
         const valueSetObject = this.valueSet(valueSet)
         if (valueSetObject === undefined) {
             return 'Unknown value set: ' + valueSet
