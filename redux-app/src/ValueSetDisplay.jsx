@@ -14,22 +14,25 @@ class ValueSetDisplay extends React.Component {
     }
 
     componentDidMount() {
-        this.props.load(this.props.valueSet)
+        const { load, valueSet } = this.props
+        load(valueSet)
     }
 
     render () {
 
-        if (this.props.isLoading) {
+        const { isLoading, error, code, valueSetDisplay } = this.props
+
+        if (isLoading) {
             return <div>Loading...</div>
         }
 
-        if (this.props.error) {
-            return <div>Error: {this.props.error}</div>
+        if (error) {
+            return <div>Error: {error}</div>
         }
 
         return (
-            <div>Display for <b>{this.props.code}</b> is:
-                <b>{this.props.valueSetDisplay || '-'}</b>
+            <div>Display for <b>{code}</b> is:
+                <b>{valueSetDisplay || '-'}</b>
             </div>
         )
     }
