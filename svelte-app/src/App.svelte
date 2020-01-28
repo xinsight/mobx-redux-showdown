@@ -3,8 +3,6 @@
 	import { isLoading } from './ValueSetStore.js'
 	import ValueSetDisplay from './ValueSetDisplay.svelte'
 
-	let showMore = false
-
 </script>
 
 <div className="App">
