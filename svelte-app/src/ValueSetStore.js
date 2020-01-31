@@ -13,11 +13,11 @@ export function load(valueSetId) {
     if (get(isLoading)) {
         return
     }
-	const url = 'http://hapi.fhir.org/baseDstu3/ValueSet/' + valueSetId
+    const url = 'http://hapi.fhir.org/baseDstu3/ValueSet/' + valueSetId
 
-	isLoading.set(true)
+    isLoading.set(true)
 
-	fetch(url)
+    fetch(url)
             .then(response => {
                 if (!response.ok) {
                 return Promise.reject(response.status)
@@ -35,7 +35,7 @@ export function load(valueSetId) {
                 error.set(err)
             })
             .finally(() => {
-				isLoading.set(false)
+                isLoading.set(false)
             })
 
 }
