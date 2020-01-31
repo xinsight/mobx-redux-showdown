@@ -10,9 +10,15 @@ The app loads a network resource, and displays it. Pretty simple stuff. To make 
 - duplicate network requests (only one request should happen)
 
 ## Update
+
+2020-01-31: It's not React, but I added a <a href="https://svelte.dev">Svelte</a> example since it sensibly includes it's own store.
+I'm not going to mix Svelte into all the commentary below, so have a look for yourselves. (It's pretty sweet!)
+
+- <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/svelte-app">svelte-app</a>: Svelte
+
 2018-11-26: I received a total rewrite of the redux app by <a href="https://github.com/markerikson">markerikson</a> using `redux-starter-kit`, and I've added it to the shootout. I'll need to update my comments below since it addresses *many* of the pain points with Redux.
 
-There are now three apps in the repo:
+There are now three React apps in the repo:
 
 - <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app">mobx-app</a>: MobX
 - <a href="https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-app">redux-app</a>: Immutable.js, sagas, hand-written action creators
@@ -181,12 +187,16 @@ As mentioned, Redux doesn't handle asynchronous operations out of the box, so yo
 Don't make a decision based on github stars alone.
 
 **Redux**
-45k
+52k
+
+**Svelte**
+29k
 
 **MobX**
-17k
+21k
 
 Browse the code for the 
+[Svelte](https://github.com/xinsight/mobx-redux-showdown/tree/master/svelte-app/src),
 [Redux](https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-app/src),
 [Redux Starter Kit](https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-starter-kit-app/src) 
 and [MobX](https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src) apps. Let me know if you have any issues or suggestions for improvement.
