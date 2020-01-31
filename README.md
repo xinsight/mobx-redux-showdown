@@ -187,12 +187,16 @@ As mentioned, Redux doesn't handle asynchronous operations out of the box, so yo
 Don't make a decision based on github stars alone.
 
 **Redux**
-45k
+52k
+
+**Svelte**
+29k
 
 **MobX**
-17k
+21k
 
 Browse the code for the 
+[Svelte](https://github.com/xinsight/mobx-redux-showdown/tree/master/svelte-app/src),
 [Redux](https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-app/src),
 [Redux Starter Kit](https://github.com/xinsight/mobx-redux-showdown/tree/master/redux-starter-kit-app/src) 
 and [MobX](https://github.com/xinsight/mobx-redux-showdown/tree/master/mobx-app/src) apps. Let me know if you have any issues or suggestions for improvement.
