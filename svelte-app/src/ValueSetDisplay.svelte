@@ -8,7 +8,7 @@ export let valueSet
 // @param
 export let code
 
-// ?: move test to store?
+// ?: move trigger to store?
 if ($valueSets[code] === undefined) {
     load(valueSet)
 }
@@ -25,5 +25,8 @@ if ($valueSets[code] === undefined) {
 </div>
 
 <style>
-    span.error { color: #c00; font-weight: bold; }
+    .error {
+        color: #c00;
+        font-weight: bold;
+    }
 </style>
